@@ -1,0 +1,187 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './main/dashboard/dashboard.component';
+import { MemberListComponent } from './main/member/member-list/member-list.component';
+import { MemberFormComponent } from './main/member/member-form/member-form.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from '../services/auth.guard';
+import { ToolsListComponent } from './main/tools/tools-list/tools-list.component';
+import { ToolsFormComponent } from './main/tools/tools-form/tools-form.component';
+import { ArticleListComponent } from './main/articles/article-list/article-list.component';
+import { ArticleFormComponent } from './main/articles/article-form/article-form.component';
+import { EventsListComponent } from './main/events/events-list/events-list.component';
+import { EventsFormComponent } from './main/events/events-form/events-form.component';
+import { MemberInfoComponent } from './main/member/member-info/member-info.component';
+import { MemberInfoTeacherComponent } from './main/member/member-info-teacher/member-info-teacher.component';
+import { MemberAddComponent } from './main/member/member-add/member-add.component';
+import { MemberEncadrantComponent } from './main/member/member-encadrant/member-encadrant.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'dashboard',
+  },
+  {
+    path: 'login',
+    pathMatch: 'full',
+    component: LoginComponent,
+  },
+  {
+    path: 'dashboard',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: DashboardComponent,
+  },
+  {
+    path: 'members',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: MemberListComponent,
+      },
+      {
+        path: 'create',
+        pathMatch: 'full',
+        component: MemberFormComponent,
+      },
+      {
+        path: ':id/add',
+        pathMatch: 'full',
+        component: MemberAddComponent,
+      },
+      {
+        path: ':id/edit',
+        pathMatch: 'full',
+        component: MemberFormComponent,
+      },
+      {
+        path: ':id/teacher',
+        pathMatch: 'full',
+        component: MemberInfoTeacherComponent,
+      },
+      {
+        path: ':id/info',
+
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: MemberInfoComponent,
+          },
+          {
+            path: ':id/teacher',
+            pathMatch: 'full',
+            component: MemberInfoTeacherComponent,
+          },
+          {
+            path: ':id/affecterteacher',
+            pathMatch: 'full',
+            component: MemberEncadrantComponent,
+          },
+
+
+          
+        ],
+      },
+      {
+        path: '**',
+        redirectTo: '',
+      }
+    ],
+  },
+  {
+    path: 'tools',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: ToolsListComponent,
+      },
+      {
+        path: 'create',
+        pathMatch: 'full',
+        component: ToolsFormComponent,
+      },
+      {
+        path: ':id/edit',
+        pathMatch: 'full',
+        component: ToolsFormComponent,
+      },
+      {
+        path: '**',
+        redirectTo: '',
+      },
+    ],
+  },
+  {
+    path: 'articles',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: ArticleListComponent,
+      },
+      {
+        path: 'create',
+        pathMatch: 'full',
+        component: ArticleFormComponent,
+      },
+      {
+        path: ':id/edit',
+        pathMatch: 'full',
+        component: ArticleFormComponent,
+      },
+      {
+        path: '**',
+        redirectTo: '',
+      },
+    ],
+  },
+  {
+    path: 'events',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: EventsListComponent,
+      },
+      {
+        path: 'create',
+        pathMatch: 'full',
+        component: EventsFormComponent,
+      },
+      {
+        path: ':id/edit',
+        pathMatch: 'full',
+        component: EventsFormComponent,
+      },
+      {
+        path: '**',
+        redirectTo: '',
+      },
+    ],
+  },
+
+  {
+    path: '**',
+    redirectTo: 'dashboard',
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}

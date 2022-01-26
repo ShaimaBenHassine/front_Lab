@@ -1,0 +1,160 @@
+
+
+<div *ngIf="etudiantItem" >
+  <mat-card class="example-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+   
+   
+    <div style="display: flex;justify-content: space-between;">
+      <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> FULL NAME </p>
+  <p style="font-size: 24px;">{{etudiantItem.nom}} {{etudiantItem.prenom}}</p>
+
+  </div>
+   
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> CIN </p>
+<p style="font-size: 24px;">{{etudiantItem.cin}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> DATE </p>
+<p style="font-size: 24px;">{{etudiantItem.date}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> EMAIL </p>
+<p style="font-size: 24px;">{{etudiantItem.email}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> DIPLOME </p>
+<p style="font-size: 24px;">{{etudiantItem.diplome}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> DATE D'INSCRIPTION </p>
+<p style="font-size: 24px;">{{etudiantItem.dateInscription}}</p>
+  </div>
+<div  *ngIf="etudiantItem.pubs.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">PUBS</p>
+
+<table mat-table [dataSource]="etudiantItem.pubs" class="mat-elevation-z8 w-100-p">
+   
+    <ng-container matColumnDef="titre">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> titre</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.titre}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="type">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> type</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dateApparition">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> dateApparition</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.dateApparition}} </td>
+    </ng-container>
+  
+   
+    
+    
+    
+    <ng-container matColumnDef="lien">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> lien</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.lien}} </td>
+    </ng-container>
+    <ng-container matColumnDef="sourcePdf">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> sourcePdf</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.sourcePdf}} </td>
+    </ng-container>
+    
+
+    <tr mat-header-row *matHeaderRowDef="pubs"></tr>
+    <tr mat-row *matRowDef="let row; columns: pubs;"></tr>
+  </table>
+
+</div>
+ <div  *ngIf="etudiantItem.outils.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">outils</p>
+
+<table mat-table  [dataSource]="etudiantItem.outils" class="mat-elevation-z8 w-100-p">
+   
+    <ng-container matColumnDef="date">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> date</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="source">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> source</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.source}} </td>
+    </ng-container>
+  
+   
+    
+  
+    
+
+    <tr mat-header-row *matHeaderRowDef="outils"></tr>
+    <tr mat-row *matRowDef="let row; columns: outils;"></tr>
+  </table>
+</div> 
+<div  *ngIf="etudiantItem.evenements.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">evenements</p>
+
+<table mat-table [dataSource]="etudiantItem.evenements" class="mat-elevation-z8 w-100-p">
+   
+    <ng-container matColumnDef="title">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> title</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="date">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> date</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lieu">
+        <th mat-header-cell class="px-12" *matHeaderCellDef> lieu</th>
+        <td mat-cell class="px-12" *matCellDef="let element"> {{element.lieu}} </td>
+      </ng-container>
+    
+   
+    
+  
+    
+
+    <tr mat-header-row *matHeaderRowDef="evenements"></tr>
+    <tr mat-row *matRowDef="let row; columns: evenements;"></tr>
+  </table>
+</div>
+<div  *ngIf="enseignantItem">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">Encadrant</p>
+<div   style="display: flex;justify-content: space-between;">
+ 
+ <div  style="display: flex;justify-content: space-between;">
+  
+
+  <p> {{enseignantItem.nom}} </p></div>
+  <p> {{enseignantItem.prenom}} </p>
+  <p> {{enseignantItem.email}} </p>
+  <mat-card-footer>
+  <button mat-icon-button [routerLink]="enseignantItem.id + '/teacher'">
+    <mat-icon>info</mat-icon>
+  </button>
+  <button mat-icon-button [routerLink]="etudiantItem.id + '/affecterteacher'">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-icon-button color="warn" (click)="onRemoveAccount(etudiantItem.id)">
+    <mat-icon>delete</mat-icon>
+  </button>
+ 
+  </mat-card-footer>
+
+
+</div>
+</div>
+<div  *ngIf="enseignantItem==null"  style="display: flex;justify-content: space-between; align-self:  center;">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">Encadrant</p>
+ 
+  <button mat-icon-button  color="primary"  [routerLink]="etudiantItem.id + '/affecterteacher'">
+  <mat-icon>add_circle</mat-icon>
+</button>
+ </div>
+</mat-card>
+</div>
